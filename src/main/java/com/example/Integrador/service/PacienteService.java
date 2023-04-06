@@ -5,11 +5,16 @@ import com.example.Integrador.entitys.Paciente;
 import com.example.Integrador.repository.IPacienteRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
+@Service
 public class PacienteService implements IPacienteService{
 
     @Autowired
@@ -35,6 +40,7 @@ public class PacienteService implements IPacienteService{
     private void cargarOdontologo(PacienteDTO pacienteDTO){
 
         Paciente paciente = mapper.convertValue(pacienteDTO, Paciente.class);
+        paciente.setFechaAlta(new Timestamp(System.currentTimeMillis()));
         pacienteRepository.save(paciente);
     }
 
