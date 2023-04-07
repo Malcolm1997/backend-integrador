@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -57,6 +56,11 @@ public class PacienteService implements IPacienteService{
     @Override
     public void eliminarPaciente(Long id) {
         pacienteRepository.deleteById(id);
+    }
+
+    @Override
+    public PacienteDTO verPaciente(Long id) {
+        return mapper.convertValue(pacienteRepository.findById(id), PacienteDTO.class);
     }
 
 }

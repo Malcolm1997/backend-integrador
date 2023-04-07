@@ -1,8 +1,7 @@
 package com.example.Integrador.controller;
 
-import com.example.Integrador.DTOs.PacienteDTO;
 import com.example.Integrador.DTOs.TurnoDTO;
-import com.example.Integrador.service.IPacienteService;
+import com.example.Integrador.entitys.Turno;
 import com.example.Integrador.service.ITurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/turnos")
@@ -38,5 +38,11 @@ public class TurnoController {
         turnoService.eliminarTurno(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public TurnoDTO verTurno(@PathVariable Long id){
+        return turnoService.verTurno(id);
+    }
+
 
 }

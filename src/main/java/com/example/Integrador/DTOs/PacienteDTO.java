@@ -1,6 +1,5 @@
 package com.example.Integrador.DTOs;
 
-import org.springframework.data.relational.core.sql.In;
 
 public class PacienteDTO {
 

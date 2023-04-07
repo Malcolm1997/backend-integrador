@@ -4,8 +4,10 @@ import com.example.Integrador.DTOs.TurnoDTO;
 import com.example.Integrador.entitys.Turno;
 import com.example.Integrador.repository.ITurnoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -18,10 +20,11 @@ public class TurnoService implements ITurnoService {
     private ITurnoRepository turnoRepository;
 
     @Autowired
-    ObjectMapper mapper;
+    ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
 
     @Override
+    @Transactional
     public Set<TurnoDTO> listarTurnos() {
         List<Turno> turnos = turnoRepository.findAll();
         Set<TurnoDTO> turnosDTO = new HashSet<>();
@@ -29,7 +32,6 @@ public class TurnoService implements ITurnoService {
         for (Turno turno : turnos){
             turnosDTO.add(mapper.convertValue(turno, TurnoDTO.class));
         }
-
         return turnosDTO;
 
     }
@@ -46,6 +48,7 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
+    @Transactional
     public void modificarTurno(TurnoDTO turnoDTO) {
         cargarTurno(turnoDTO);
     }
@@ -53,5 +56,11 @@ public class TurnoService implements ITurnoService {
     @Override
     public void eliminarTurno(Long id) {
         turnoRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public TurnoDTO verTurno(Long id) {
+        return mapper.convertValue( turnoRepository.findById(id), TurnoDTO.class);
     }
 }

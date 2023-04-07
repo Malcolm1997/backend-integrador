@@ -1,6 +1,7 @@
 package com.example.Integrador.controller;
 
 import com.example.Integrador.DTOs.OdontologoDTO;
+import com.example.Integrador.entitys.Odontologo;
 import com.example.Integrador.service.IOdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/odontologos")
@@ -37,6 +39,11 @@ public class OdontologoController {
     public ResponseEntity<?> eliminarOdontologo(@PathVariable Long id){
         odontologoService.eliminarOdontologo(id);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public OdontologoDTO verOdontologo(@PathVariable Long id){
+        return odontologoService.verOdontologo(id);
     }
 
 }

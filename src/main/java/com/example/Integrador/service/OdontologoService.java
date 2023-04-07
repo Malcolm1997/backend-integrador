@@ -55,4 +55,9 @@ public class OdontologoService implements IOdontologoService{
     public void eliminarOdontologo(Long id) {
         odontologoRepository.deleteById(id);
     }
+
+    @Override
+    public OdontologoDTO verOdontologo(Long id) {
+        return  mapper.convertValue( odontologoRepository.findById(id) , OdontologoDTO.class);
+    }
 }

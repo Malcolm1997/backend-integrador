@@ -3,12 +3,12 @@ package com.example.Integrador.DTOs;
 import com.example.Integrador.entitys.Odontologo;
 import com.example.Integrador.entitys.Paciente;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class TurnoDTO {
 
     private Long id;
-    private Date horarioTurno;
+    private LocalDateTime horarioTurno;
     private Paciente paciente;
     private Odontologo odontologo;
 
@@ -23,11 +23,11 @@ public class TurnoDTO {
         this.id = id;
     }
 
-    public Date getHorarioTurno() {
+    public LocalDateTime getHorarioTurno() {
         return horarioTurno;
     }
 
-    public void setHorarioTurno(Date horarioTurno) {
+    public void setHorarioTurno(LocalDateTime horarioTurno) {
         this.horarioTurno = horarioTurno;
     }
 
