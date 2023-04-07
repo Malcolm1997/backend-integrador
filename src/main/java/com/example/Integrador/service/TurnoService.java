@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 @Service
 public class TurnoService implements ITurnoService {
@@ -21,6 +22,7 @@ public class TurnoService implements ITurnoService {
 
     @Autowired
     ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+
 
 
     @Override
@@ -44,6 +46,7 @@ public class TurnoService implements ITurnoService {
 
     @Override
     public void agregarTurno(TurnoDTO turnoDTO) {
+
         cargarTurno(turnoDTO);
     }
 

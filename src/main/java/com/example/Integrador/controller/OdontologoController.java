@@ -3,6 +3,8 @@ package com.example.Integrador.controller;
 import com.example.Integrador.DTOs.OdontologoDTO;
 import com.example.Integrador.entitys.Odontologo;
 import com.example.Integrador.service.IOdontologoService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,8 @@ public class OdontologoController {
     @Autowired
     IOdontologoService odontologoService;
 
+    private final Logger log = LogManager.getLogger(OdontologoController.class);
+
     @GetMapping
     public Collection<OdontologoDTO> obtenerTodos(){
         return odontologoService.listarOdontologos();
@@ -25,6 +29,7 @@ public class OdontologoController {
 
     @PostMapping("/agregar")
     public ResponseEntity<?> crearOdontologo(@RequestBody OdontologoDTO odontologoDTO){
+        log.info("Agregando un odontologo...");
         odontologoService.agregarOdontologo(odontologoDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
